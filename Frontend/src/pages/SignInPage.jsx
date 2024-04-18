@@ -47,6 +47,7 @@ function SignInPage() {
       }
     } catch (error) {
       console.error("Sign in failed:", error.response?.data || error.message);
+      alert("Invalid information!!!");
     }
   };
 
