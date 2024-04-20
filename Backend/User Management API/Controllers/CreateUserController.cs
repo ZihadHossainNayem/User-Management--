@@ -65,7 +65,7 @@ namespace User_Management_API.Controllers
 
             var notification = new Notification
             {
-                Content = $"User {user.Username} has been created by {user.CreatedBy} at {DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss")} UTC",
+                Content = $"User '{user.Username}' has been created by '{user.CreatedBy}' at {DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")}",
 
                 UserId = user.Id 
             };

@@ -24,34 +24,53 @@ const UserHomePage = ({ hubConnection }) => {
 
   return (
     <Box sx={{ mt: 4 }}>
-      <Container component="main" maxWidth="sm">
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "100%",
-          }}
-        >
-          <Typography variant="h4" sx={{ fontWeight: "700" }} gutterBottom>
-            User Information
+      <Container
+        component="main"
+        maxWidth="sm"
+        sx={{ borderLeft: 1, borderRight: 1, borderColor: "#D3D3D3" }}
+      >
+        <Box sx={{ mx: 2 }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <Typography variant="h4" sx={{ fontWeight: "700" }} gutterBottom>
+              User Information
+            </Typography>
+            <Notification hubConnection={hubConnection} />
+          </Box>
+          <Typography variant="body1" sx={{ display: "flex" }}>
+            <strong style={{ width: "110px" }}> Username: </strong>
+            {user.username}
           </Typography>
-          <Notification hubConnection={hubConnection} />
-        </Box>
-        <Typography variant="body1">Username: {user.username}</Typography>
-        <Typography variant="body1">Full Name: {user.fullName}</Typography>
-        <Typography variant="body1">Role: {user.role}</Typography>
-        <Typography variant="body1">Phone: {user.phone}</Typography>
-        <Typography variant="body1">CreatedBy: {user.createdBy}</Typography>
+          <Typography variant="body1" sx={{ display: "flex" }}>
+            <strong style={{ width: "110px" }}> Full Name: </strong>
+            {user.fullName}
+          </Typography>
+          <Typography variant="body1" sx={{ display: "flex" }}>
+            <strong style={{ width: "110px" }}> Role: </strong> {user.role}
+          </Typography>
+          <Typography variant="body1" sx={{ display: "flex" }}>
+            <strong style={{ width: "110px" }}> Phone: </strong> {user.phone}
+          </Typography>
+          <Typography variant="body1" sx={{ display: "flex" }}>
+            <strong style={{ width: "110px" }}>CreatedBy:</strong>{" "}
+            {user.createdBy}
+          </Typography>
 
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={handleLogout}
-          sx={{ mt: 2 }}
-        >
-          Logout
-        </Button>
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={handleLogout}
+            sx={{ mt: 2 }}
+          >
+            Logout
+          </Button>
+        </Box>
       </Container>
     </Box>
   );

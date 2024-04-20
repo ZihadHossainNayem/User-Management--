@@ -28,18 +28,19 @@ const NotificationPage = () => {
 
   return (
     <Box sx={{ mt: 4 }}>
-      <Container component="main" maxWidth="sm">
-        <Typography variant="h4" component="h1" gutterBottom>
+      <Container
+        component="main"
+        maxWidth="sm"
+        sx={{ borderLeft: 1, borderRight: 1, borderColor: "#D3D3D3" }}
+      >
+        <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold" }}>
           Notifications
         </Typography>
         {notifications.length ? (
           <List>
             {notifications.map((notification, index) => (
               <ListItem key={index} divider>
-                <ListItemText
-                  primary={notification.content}
-                  secondary={new Date(notification.createdAt).toLocaleString()}
-                />
+                <ListItemText primary={notification.content} />
               </ListItem>
             ))}
           </List>
