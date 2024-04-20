@@ -70,7 +70,32 @@ const AdminHomePage = ({ hubConnection }) => {
     navigate("/");
   };
 
-  const handleReport = () => {};
+  const handleReport = async () => {
+    try {
+      const response = await axios.get(
+        "https://localhost:44352/api/ReportGenerate/user-report",
+        {
+          responseType: "blob", // response type is blob for PDF....
+        }
+      );
+
+      // new FileReader here....
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const newWindow = window.open("");
+        // set the content of the new window to the data URL containing the PDF....
+        newWindow.document.write(
+          `<iframe src="${reader.result}" style="width:100%;height:100%;"></iframe>`
+        );
+      };
+
+      // read the blob data as a data URL...
+      reader.readAsDataURL(response.data);
+    } catch (error) {
+      console.error("Error generating user report:", error);
+    }
+  };
 
   if (!admin) return <div>Loading admin information...</div>;
 
