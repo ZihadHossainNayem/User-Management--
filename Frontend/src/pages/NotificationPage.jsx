@@ -30,7 +30,7 @@ const NotificationPage = () => {
     <Box sx={{ mt: 4 }}>
       <Container
         component="main"
-        maxWidth="sm"
+        maxWidth="md"
         sx={{ borderLeft: 1, borderRight: 1, borderColor: "#D3D3D3" }}
       >
         <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold" }}>

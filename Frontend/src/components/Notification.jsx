@@ -90,7 +90,7 @@ const Notification = ({ hubConnection }) => {
               <MenuItem key={index} onClick={handleClose}>
                 {notification}
               </MenuItem>
-              {index !== notifications.length - 1 && <Divider />}
+              {index !== notifications.length && <Divider />}
             </>
           ))
         )}

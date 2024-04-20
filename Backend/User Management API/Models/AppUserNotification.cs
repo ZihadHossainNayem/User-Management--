@@ -1,4 +1,4 @@
-﻿namespace User_Management_API.Models
+﻿/* namespace User_Management_API.Models
 {
     public class AppUserNotification
     {
@@ -12,3 +12,4 @@
         public bool IsRead { get; set; } = false; // Defaults to false when created
     }
 }
+*/

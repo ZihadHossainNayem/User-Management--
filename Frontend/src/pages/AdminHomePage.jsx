@@ -16,6 +16,20 @@ import KeyIcon from "@mui/icons-material/Key";
 import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
 import BadgeIcon from "@mui/icons-material/Badge";
 import Notification from "../components/Notification";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      smd: 700,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
+    },
+  },
+});
 
 const AdminHomePage = ({ hubConnection }) => {
   const [admin, setAdmin] = useState(null);
@@ -100,166 +114,187 @@ const AdminHomePage = ({ hubConnection }) => {
   if (!admin) return <div>Loading admin information...</div>;
 
   return (
-    <Box sx={{ mt: 4 }}>
-      <Container
-        component="main"
-        maxWidth="sm"
-        sx={{ borderLeft: 1, borderRight: 1, borderColor: "#D3D3D3" }}
-      >
-        <Box sx={{ mx: 2 }}>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              width: "100%",
-            }}
-          >
-            <Typography
-              variant="h4"
+    <ThemeProvider theme={theme}>
+      <Box sx={{ mt: 4 }}>
+        <Container
+          component="main"
+          maxWidth="smd"
+          sx={{ borderLeft: 1, borderRight: 1, borderColor: "#D3D3D3" }}
+        >
+          <Box sx={{ mx: 2, py: 2 }}>
+            <Box
               sx={{
-                fontWeight: "700",
-                fontSize: {
-                  xs: "1.5rem",
-                  sm: "2.0rem",
-                },
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                width: "100%",
               }}
-              gutterBottom
             >
-              Admin Information
+              <Typography
+                variant="h4"
+                sx={{
+                  color: "#36454F",
+                  fontWeight: "700",
+                  fontSize: {
+                    xs: "1.5rem",
+                    sm: "2.0rem",
+                  },
+                }}
+                gutterBottom
+              >
+                Admin Information
+              </Typography>
+              <Notification hubConnection={hubConnection} />
+            </Box>
+            <Typography
+              variant="body1"
+              sx={{ display: "flex", color: "#36454F" }}
+            >
+              <strong style={{ width: "110px" }}>Username:</strong>
+              {admin.username}
             </Typography>
-            <Notification hubConnection={hubConnection} />
-          </Box>
-          <Typography variant="body1" sx={{ display: "flex" }}>
-            <strong style={{ width: "110px" }}>Username:</strong>
-            {admin.username}
-          </Typography>
-          <Typography variant="body1" sx={{ display: "flex" }}>
-            <strong style={{ width: "110px" }}>Full Name: </strong>
-            {admin.fullName}
-          </Typography>
-          <Typography variant="body1" sx={{ display: "flex" }}>
-            <strong style={{ width: "110px" }}>Role:</strong> {admin.role}
-          </Typography>
-          <Typography variant="body1" sx={{ display: "flex" }}>
-            <strong style={{ width: "110px" }}>Phone:</strong> {admin.phone}
-          </Typography>
-
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Button
-              variant="outlined"
-              color="error"
-              onClick={handleLogout}
-              sx={{ mt: 2 }}
+            <Typography
+              variant="body1"
+              sx={{ display: "flex", color: "#36454F" }}
             >
-              Logout
-            </Button>
-
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={handleReport}
-              sx={{ mt: 2 }}
-            >
-              Users Information Report
-            </Button>
-          </Box>
-
-          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 4 }}>
-            <Typography variant="h5" gutterBottom sx={{ fontWeight: "500" }}>
-              Create New User
+              <strong style={{ width: "110px" }}>Full Name: </strong>
+              {admin.fullName}
             </Typography>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              label="Username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <PersonIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <KeyIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TextField
-              margin="normal"
-              fullWidth
-              label="Full Name"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <BadgeIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              select
-              label="Role"
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              SelectProps={{
-                native: true,
+            <Typography
+              variant="body1"
+              sx={{ display: "flex", color: "#36454F" }}
+            >
+              <strong style={{ width: "110px" }}>Role:</strong> {admin.role}
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{ display: "flex", color: "#36454F" }}
+            >
+              <strong style={{ width: "110px" }}>Phone:</strong> {admin.phone}
+            </Typography>
+
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                color: "#36454F",
               }}
             >
-              <option value="User">User</option>
-              <option value="Admin">Admin</option>
-            </TextField>
-            <TextField
-              margin="normal"
-              fullWidth
-              label="Phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <PhoneEnabledIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Create User
-            </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={handleLogout}
+                sx={{ mt: 2 }}
+              >
+                Logout
+              </Button>
+
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={handleReport}
+                sx={{ mt: 2 }}
+              >
+                Users Information Report
+              </Button>
+            </Box>
+
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 4 }}>
+              <Typography variant="h5" gutterBottom sx={{ fontWeight: "500" }}>
+                Create New User
+              </Typography>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                label="Username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <PersonIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                value={formData.password}
+                onChange={handleChange}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <KeyIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Full Name"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <BadgeIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                select
+                label="Role"
+                name="role"
+                value={formData.role}
+                onChange={handleChange}
+                SelectProps={{
+                  native: true,
+                }}
+              >
+                <option value="User">User</option>
+                <option value="Admin">Admin</option>
+              </TextField>
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <PhoneEnabledIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Create User
+              </Button>
+            </Box>
           </Box>
-        </Box>
-      </Container>
-    </Box>
+        </Container>
+      </Box>
+    </ThemeProvider>
   );
 };
 
