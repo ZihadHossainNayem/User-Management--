@@ -8,6 +8,6 @@
     public string Phone { get; set; }
     public string CreatedBy { get; set; }
 
-    // Navigation property for related notifications
-    public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+    /* Navigation property for related notifications
+    public ICollection<Notification> Notifications { get; set; } = new List<Notification>(); */
 }

@@ -6,6 +6,7 @@ import {
   Typography,
   InputAdornment,
   Box,
+  Paper,
 } from "@mui/material";
 
 import PersonIcon from "@mui/icons-material/Person";
@@ -56,77 +57,82 @@ function SignInPage() {
       sx={{
         width: "100%",
         minHeight: "100vh",
-        background: "linear-gradient(to right, #e6f7ff, #ffffff)",
+        background: "#EEF2F6",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <Container component="main" maxWidth="xs">
-        <div
-          style={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form style={{ width: "100%", marginTop: 1 }} onSubmit={handleSignIn}>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="username"
-              autoFocus
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <PersonIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <KeyIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              style={{ margin: "24px 0px 16px" }}
+      <Paper elevation={5}>
+        <Container component="main" maxWidth="xs" sx={{ m: 4 }}>
+          <div
+            style={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Typography component="h1" variant="h4" color="primary">
+              <strong>Sign in</strong>
+            </Typography>
+            <form
+              style={{ width: "100%", marginTop: 1 }}
+              onSubmit={handleSignIn}
             >
-              Sign In
-            </Button>
-          </form>
-        </div>
-      </Container>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <PersonIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <KeyIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                style={{ margin: "24px 0px 16px" }}
+              >
+                Sign In
+              </Button>
+            </form>
+          </div>
+        </Container>
+      </Paper>
     </Box>
   );
 }

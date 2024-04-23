@@ -5,6 +5,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  Paper,
   Typography,
 } from "@mui/material";
 import axios from "axios";
@@ -27,29 +28,34 @@ const NotificationPage = () => {
   }, []);
 
   return (
-    <Box sx={{ mt: 4 }}>
-      <Container
-        component="main"
-        maxWidth="md"
-        sx={{ borderLeft: 1, borderRight: 1, borderColor: "#D3D3D3" }}
-      >
-        <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold" }}>
-          Notifications
-        </Typography>
-        {notifications.length ? (
-          <List>
-            {notifications.map((notification, index) => (
-              <ListItem key={index} divider>
-                <ListItemText primary={notification.content} />
-              </ListItem>
-            ))}
-          </List>
-        ) : (
-          <Typography variant="subtitle1">
-            No notifications to display
+    <Box
+      sx={{
+        py: 4,
+        backgroundColor: "#EEF2F6",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <Paper elevation={4} sx={{ width: "60%" }}>
+        <Container component="main" maxWidth="lg" sx={{ py: 3 }}>
+          <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold" }}>
+            Notifications
           </Typography>
-        )}
-      </Container>
+          {notifications.length ? (
+            <List>
+              {notifications.map((notification, index) => (
+                <ListItem key={index} divider>
+                  <ListItemText primary={notification.content} />
+                </ListItem>
+              ))}
+            </List>
+          ) : (
+            <Typography variant="subtitle1">
+              No notifications to display
+            </Typography>
+          )}
+        </Container>
+      </Paper>
     </Box>
   );
 };

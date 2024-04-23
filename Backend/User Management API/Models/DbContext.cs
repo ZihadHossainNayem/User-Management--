@@ -12,7 +12,7 @@ namespace User_Management_API.Data
         public DbSet<Notification> Notifications { get; set; }
 
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+     /*   protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
@@ -21,6 +21,6 @@ namespace User_Management_API.Data
                 .HasMany(u => u.Notifications)
                 .WithOne(n => n.User)
                 .HasForeignKey(n => n.UserId);
-        }
+        } */
     }
 }

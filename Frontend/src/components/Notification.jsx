@@ -34,7 +34,7 @@ const Notification = ({ hubConnection }) => {
         hubConnection.off("ReceiveNotification", receiveNotification);
       };
     }
-  }, [hubConnection]);
+  }, [hubConnection, setNotifications, setHasUnreadNotifications]);
 
   const open = Boolean(anchorEl);
 
@@ -85,14 +85,12 @@ const Notification = ({ hubConnection }) => {
         {notifications.length === 0 ? (
           <MenuItem onClick={handleClose}>No new notifications</MenuItem>
         ) : (
-          notifications.map((notification, index) => (
-            <>
-              <MenuItem key={index} onClick={handleClose}>
-                {notification}
-              </MenuItem>
-              {index !== notifications.length && <Divider />}
-            </>
-          ))
+          notifications.map((notification, index) => [
+            <MenuItem key={index} onClick={handleClose}>
+              {notification}
+            </MenuItem>,
+            <Divider key={`divider-${index}`} />,
+          ])
         )}
         {isUserAdmin && (
           <Button onClick={handleViewAll} sx={{ display: "flex", mx: "auto" }}>

@@ -26,6 +26,8 @@ function App() {
         const userRole = user.role;
         console.log(userRole);
 
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
         await connection.invoke("AddUserToRoleGroup", userRole);
       } catch (err) {
         console.log("SignalR Connection Failed: ", err);
