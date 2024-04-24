@@ -1,5 +1,5 @@
 ## Introduction
-This project aims to provide a user management system with features for user creation, authentication, and notification functionalities. It consists of a frontend application built with React and a backend API developed using ASP.NET Core.
+This project aims to provide a user management system with features for user creation, authentication, notification functionalities and reporting. It consists of a frontend application built with React and a backend API developed using ASP.NET Core.
 
 ### Technologies Used:
 
@@ -33,4 +33,4 @@ The frontend communicates with the backend API to perform various user-related t
 - **Notification Hub:** Facilitates real-time communication between the server and connected clients for instant notification delivery.
 
 ### Reporting:
-- **DevExpress Reporting Tool Integration: Added functionality for administrators to generate reports on user information. Administrators can access reports through the Admin Dashboard.
+- **DevExpress Reporting Tool Integration:** Added functionality for administrators to generate reports on user information. Administrators can access reports through the Admin Dashboard.
