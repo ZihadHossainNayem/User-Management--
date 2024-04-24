@@ -231,7 +231,9 @@
             // 
             this.xrLabel3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Phone]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "ForeColor", "Iif(Substring([Phone], Len([Phone]) - 1) == \'9\', \'Red\', \'Black\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(Substring([Phone], 0, 4) == \'0177\', \'Yellow\', Substring([Phone], 0, 4) == \'01" +
+                    "55\', \'Orange\',Substring([Phone], 0, 4) == \'0144\', \'LightGreen\', Substring([Phone" +
+                    "], 0, 4) == \'0166\', \'Aqua\', \'White\')")});
             this.xrLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(329.1667F, 1.999998F);
             this.xrLabel3.Multiline = true;
