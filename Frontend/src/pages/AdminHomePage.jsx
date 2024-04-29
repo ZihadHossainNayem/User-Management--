@@ -8,6 +8,9 @@ import {
   Container,
   InputAdornment,
   Paper,
+
+  //List,
+  // ListItem,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -16,8 +19,10 @@ import PersonIcon from "@mui/icons-material/Person";
 import KeyIcon from "@mui/icons-material/Key";
 import PhoneEnabledIcon from "@mui/icons-material/PhoneEnabled";
 import BadgeIcon from "@mui/icons-material/Badge";
+
 import Notification from "../components/Notification";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Search from "../components/Search";
 
 const theme = createTheme({
   breakpoints: {
@@ -34,6 +39,7 @@ const theme = createTheme({
 
 const AdminHomePage = ({ hubConnection }) => {
   const [admin, setAdmin] = useState(null);
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -51,6 +57,7 @@ const AdminHomePage = ({ hubConnection }) => {
     }
   }, []);
 
+  /* form - handle change */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -59,11 +66,13 @@ const AdminHomePage = ({ hubConnection }) => {
     });
   };
 
+  /* form handle submit */
   const handleSubmit = async (e) => {
     e.preventDefault();
     const adminInfo = JSON.parse(localStorage.getItem("user"));
     const dataToSubmit = { ...formData, createdBy: adminInfo.username };
 
+    /* user create api */
     try {
       const response = await axios.post(
         "https://localhost:44352/api/CreateUser",
@@ -80,11 +89,14 @@ const AdminHomePage = ({ hubConnection }) => {
     }
   };
 
+  /* log out handling */
+
   const handleLogout = () => {
     localStorage.removeItem("user");
     navigate("/");
   };
 
+  /* report generate api call */
   const handleReport = async () => {
     try {
       const response = await axios.get(
@@ -131,7 +143,6 @@ const AdminHomePage = ({ hubConnection }) => {
               <Box
                 sx={{
                   display: "flex",
-                  alignItems: "center",
                   justifyContent: "space-between",
                   width: "100%",
                 }}
@@ -150,7 +161,12 @@ const AdminHomePage = ({ hubConnection }) => {
                 >
                   Admin Information
                 </Typography>
-                <Notification hubConnection={hubConnection} />
+
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  {/* search */}
+                  <Search />
+                  <Notification hubConnection={hubConnection} />
+                </Box>
               </Box>
               <Typography
                 variant="body1"
@@ -214,6 +230,7 @@ const AdminHomePage = ({ hubConnection }) => {
                   Create New User
                 </Typography>
                 <TextField
+                  size="small"
                   margin="normal"
                   required
                   fullWidth
@@ -230,6 +247,7 @@ const AdminHomePage = ({ hubConnection }) => {
                   }}
                 />
                 <TextField
+                  size="small"
                   margin="normal"
                   required
                   fullWidth
@@ -247,6 +265,7 @@ const AdminHomePage = ({ hubConnection }) => {
                   }}
                 />
                 <TextField
+                  size="small"
                   margin="normal"
                   fullWidth
                   label="Full Name"
@@ -262,6 +281,7 @@ const AdminHomePage = ({ hubConnection }) => {
                   }}
                 />
                 <TextField
+                  size="small"
                   margin="normal"
                   required
                   fullWidth
@@ -278,6 +298,7 @@ const AdminHomePage = ({ hubConnection }) => {
                   <option value="Admin">Admin</option>
                 </TextField>
                 <TextField
+                  size="small"
                   margin="normal"
                   fullWidth
                   label="Phone"
