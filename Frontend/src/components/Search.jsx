@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Box, Button, IconButton, TextField, Typography } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  Button,
+  IconButton,
+  MenuItem,
+  TextField,
+  Typography,
+} from "@mui/material";
 import Modal from "@mui/material/Modal";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
@@ -13,6 +21,7 @@ const Search = () => {
   });
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
+  const [usernameOptions, setUsernameOptions] = useState([]);
 
   const handleSearchChange = (e) => {
     const { name, value } = e.target;
@@ -45,6 +54,29 @@ const Search = () => {
     } catch (error) {
       console.error("Error searching users:", error);
     }
+  };
+
+  const fetchUsernameOptions = async (inputValue) => {
+    try {
+      const response = await fetch(
+        `https://localhost:44352/api/Search?username=${inputValue}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch username options");
+      }
+      const data = await response.json();
+      return data.map((user) => user.username);
+    } catch (error) {
+      console.error("Error fetching username options:", error);
+      return [];
+    }
+  };
+
+  const handleUsernameChange = async (newValue) => {
+    setSearchParams((prevState) => ({
+      ...prevState,
+      username: newValue,
+    }));
   };
 
   return (
@@ -82,16 +114,29 @@ const Search = () => {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Search User
           </Typography>
-          <TextField
-            margin="normal"
-            fullWidth
-            label="Username"
-            size="small"
-            name="username"
-            value={searchParams.username}
-            onChange={handleSearchChange}
-            sx={{ marginBottom: "16px" }}
+
+          <Autocomplete
+            options={usernameOptions}
+            onChange={(event, newValue) => handleUsernameChange(newValue)}
+            freeSolo
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                margin="normal"
+                fullWidth
+                label="Username"
+                size="small"
+                name="username"
+                value={searchParams.username}
+                onChange={handleSearchChange}
+                sx={{ marginBottom: "16px" }}
+              />
+            )}
+            onInputChange={async (event, newInputValue) => {
+              setUsernameOptions(await fetchUsernameOptions(newInputValue));
+            }}
           />
+
           <TextField
             margin="normal"
             fullWidth
@@ -102,6 +147,20 @@ const Search = () => {
             onChange={handleSearchChange}
             sx={{ marginBottom: "16px" }}
           />
+
+          <TextField
+            size="small"
+            margin="normal"
+            fullWidth
+            select
+            label="Phone"
+            name="role"
+            value={searchParams.role}
+            onChange={handleSearchChange}
+          >
+            <MenuItem value="User">User</MenuItem>
+            <MenuItem value="Admin">Admin</MenuItem>
+          </TextField>
           <TextField
             margin="normal"
             fullWidth
@@ -112,16 +171,7 @@ const Search = () => {
             onChange={handleSearchChange}
             sx={{ marginBottom: "16px" }}
           />
-          <TextField
-            margin="normal"
-            fullWidth
-            label="Role"
-            size="small"
-            name="role"
-            value={searchParams.role}
-            onChange={handleSearchChange}
-            sx={{ marginBottom: "16px" }}
-          />
+
           <Button
             variant="contained"
             color="primary"
@@ -149,12 +199,10 @@ const Search = () => {
           </IconButton>
 
           {searchResults.map((result) => (
-            <div key={result.id}>
-              <Box>
-                {result.fullName} {result.username} {result.phone} {result.role}{" "}
-                {result.password}
-              </Box>
-            </div>
+            <Box key={result.id}>
+              {result.fullName}, {result.username}, {result.phone},{" "}
+              {result.role} {result.password}
+            </Box>
           ))}
         </Box>
       </Modal>
